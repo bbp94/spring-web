@@ -1,0 +1,130 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>hello</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style type="text/css">
+        table
+        {
+            border-collapse: collapse;//单线条边框
+            border-spacing: 0;
+            margin-right: auto;
+            margin-left: auto;
+            width: 800px;
+        }
+        th, td
+        {
+            border: 1px solid #b5d6e6;
+            font-size: 15px;
+            font-weight: normal;
+            text-align: center;
+            vertical-align: middle;
+            height: 20px;
+        }
+        th
+        {
+            font-size: 20px;
+            background-color: lightblue;//表头背景色
+        }
+        .tickTable{
+
+            top: 50%;
+        }
+        .search{
+            position: relative;
+            left: 240px;
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-1.11.3.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            var $hello = $('#hello');
+            $hello.html("欢迎使用bbp购票系统！").css('color','green');
+        })
+
+        // $(function () {
+        //     $('#btn').click(function () {
+        function loadBtn() {
+            var data = 'username=' + $('#username').val() + '&password=' + $('#password').val();
+            $.ajax({
+                type : 'POST',
+                url : '/load',
+                data : data,
+                success : function(r) {
+                    console.log(r);
+                },
+                error : function() {
+                    alert('error!')
+                }
+            });
+            $.ajax({
+                type:'POST',
+                url:'/show',
+                success : function(r) {
+                    console.log(r);
+                },
+                error : function() {
+                    alert('error!')
+                }
+            });
+        }
+        //     })
+        //
+        //
+        // })
+
+
+    </script>
+</head>
+<body>
+<!--/*@thymesVar id="name" type="java.lang.String"*/-->
+<div style="font-size: 24px;text-align:center;">
+    <p id="hello"></p>
+</div>
+
+<div class="search" style="vertical-align: middle;">
+    出发日期：<input id="date" name="date" value="">
+    出发站：<input id="origin" name="origin" value="">
+    到达站：<input id="terminal" name="terminal" value="">
+    <input id="btn" type="button" name="button" value="搜索">
+    <br/>
+    <br/>
+</div>
+
+<div class="tickTable">
+    <table>
+        <tr>
+            <th style="width: 160px;">出发日期</th>
+            <th style="width: 160px;">车次</th>
+            <th style="width: 160px;">起点站 </th>
+            <th style="width: 160px;">终点站</th>
+            <th style="width: 160px;">中间站</th>
+            <th style="width: 160px;">全程时长</th>
+
+        </tr>
+
+        <tr>
+            <td >第一行第一列</td>
+            <td >第一行第二列</td>
+            <td >第一行第三列</td>
+            <td >第一行第四列</td>
+            <td >第一行第五列</td>
+            <td >第一行第六列</td>
+        </tr>
+
+    </table>
+</div>
+
+    <!--<form id="load" action="" method="get">-->
+        <!--用户名：<input id="username" name="username" value=""/><br/>-->
+        <!--密  码：<input id="password" type="password" name="password" value=""/><br/>-->
+        <!--<input id="btn" type="button" value="登陆" onclick="loadBtn()"/>-->
+    <!--</form>-->
+
+<!--<p th:text="'Hello！, ' + ${name} + '!'">3333</p>-->
+
+<!--&lt;!&ndash;/*@thymesVar id="time" type="java.lang.String"*/&ndash;&gt;-->
+<!--<p th:text="'Now is : ' + ${time} + '!'">3333</p>-->
+</body>
+</html>

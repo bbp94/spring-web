@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>hello</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style type="text/css">
+        div{
+            padding:2px 0px;
+            font-size:30px;
+            text-align:center;
+            /*border:solid 1px #888;*/
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-1.11.3.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            var $hello = $('#hello');
+            $hello.html("您好！欢迎使用！").css('color','green');
+        })
+        function loadBtn() {
+            var data = 'username=' + $('#username').val() + '&password=' + $('#password').val();
+            $.ajax({
+                type : 'POST',
+                url : '/load',
+                data : data,
+                success : function(r) {
+                    console.log(r);
+                    $(location).attr('href', 'http://localhost:2718/show');
+                },
+                error : function() {
+                    alert('11error!')
+                }
+            });
+        }
+
+
+    </script>
+</head>
+<body>
+<!--/*@thymesVar id="name" type="java.lang.String"*/-->
+<div>
+    <p id="hello"></p>
+
+
+    <form id="load" action="" method="get">
+        用户名：<input id="username" name="username" value=""/><br/>
+        密  码：<input id="password" type="password" name="password" value=""/><br/>
+        <input id="btn" type="button" value="登陆" onclick="loadBtn()"/>
+    </form>
+</div>
+<!--<p th:text="'Hello！, ' + ${name} + '!'">3333</p>-->
+
+<!--&lt;!&ndash;/*@thymesVar id="time" type="java.lang.String"*/&ndash;&gt;-->
+<!--<p th:text="'Now is : ' + ${time} + '!'">3333</p>-->
+</body>
+</html>
